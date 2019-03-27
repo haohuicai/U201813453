@@ -20,7 +20,7 @@ List init()
 }
 int *Joseph(List p,int *a,int n)
 {
-    List head,_L;
+    List head,_L,t,q;
     head  = p;
     int k,m;
     int i;
@@ -29,15 +29,17 @@ int *Joseph(List p,int *a,int n)
    i = 0;
    while(head->next!=head)
    {
-       for(k=0;k<abs(m-2);k++)
+
+        for(k=0;k<m-1;k++)
         head = head->next;
-       a[i]=head->next->number;
-        m = head->next->data;
-        _L = head->next;
-        head->next = head->next->next;
-        head = head->next;
+       a[i]=head->number;
+        m = head->data;
+       t = head;
+        while(t->next!=head) t = t->next;
+        t->next = t->next->next;
+        head = t->next;
         i++;
-        free(_L);
+
    }
   a[n-1] = head->number;
   return a;
